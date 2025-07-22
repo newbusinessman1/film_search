@@ -13,14 +13,23 @@ def print_movies(rows):
     t.add_column("Год", justify="center")
     t.add_column("Жанры")
     for r in rows:
-        t.add_row(str(r["film_id"]), r["title"],
-                  str(r["release_year"]), r.get("genres", "-"))
+        t.add_row(
+            str(r["film_id"]),
+            r["title"],
+            str(r["release_year"]),
+            r.get("genres", "-")
+        )
     console.print(t)
 
 def print_stats(rows, title):
     t = Table(title=title)
     t.add_column("Запрос")
-    t.add_column("Cnt", justify="right")
+    t.add_column("Cnt/Время", justify="right")
     for r in rows:
-        t.add_row(str(r["_id"]), str(r["cnt"]))
+        query = r["_id"]
+        if isinstance(query, dict):
+            # если это keyword-запрос → покажем только значение
+            query = query.get("kw") or json.dumps(query, ensure_ascii=False)
+        value = r.get("cnt") or r.get("ts") or "-"
+        t.add_row(str(query), str(value))
     console.print(t)
