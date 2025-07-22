@@ -1,0 +1,4 @@
+pymysql
+pymongo
+python-dotenv
+rich
