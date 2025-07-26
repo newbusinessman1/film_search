@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green)
 
-Консольное приложение, позволяющее искать фильмы в учебной базе **sakila** (MySQL), сохранять историю запросов в **MongoDB** и анализировать популярные поиски. Разработано как финальный проект курса *Python Fundamentals*.
+Консольное приложение на Английском языке, позволяющее искать фильмы в учебной базе **sakila** (MySQL), сохранять историю запросов в **MongoDB** и анализировать популярные поиски. Разработано как финальный проект студента Oleksandr Kovalchuk, курса *Python Fundamentals - IT Career Hub GMBH*.
 
 ---
 
@@ -34,9 +34,9 @@
 
 - Python ≥ 3.10  
 - Локальные (или Docker‑) экземпляры **MySQL** и **MongoDB**  
-- Интернет не требуется; все операции выполняются локально.
+- Требуется Интернет подключение; все операции выполняются через удаленную базу данных.
 
-> **Суммарно** приложение протестировано на Ubuntu 22.04 LTS, Windows 11 Pro, macOS Sonoma.
+> **Суммарно** приложение протестировано на macOS Sequoia 15.1.1.
 
 ---
 
@@ -44,7 +44,7 @@
 
 ```bash
 # 1. Клонируем репозиторий и переходим в него
-$ git clone https://github.com/<username>/film_search.git
+$ git clone https://github.com/newbusinessman1/film_search.git
 $ cd film_search
 
 # 2. Создаём и активируем виртуальное окружение
@@ -54,5 +54,5 @@ $ source venv/bin/activate   # Windows: venv\Scripts\activate
 # 3. Устанавливаем зависимости
 $ pip install -r requirements.txt
 
-# 4. Заполняем файл .env
+# 4. Заполняем файл .env своими данными
 $ cp .env.example .env      # или создайте вручную

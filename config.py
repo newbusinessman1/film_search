@@ -3,7 +3,7 @@ import os
 
 load_dotenv()
 
-# ---------- MySQL ----------
+# ---------- MySQL(sakila) ----------
 MYSQL_CONFIG = {
     "host": os.getenv("MYSQL_HOST"),
     "port": int(os.getenv("MYSQL_PORT", 3306)),
