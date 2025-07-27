@@ -2,57 +2,131 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue) ![License](https://img.shields.io/badge/License-MIT-green)
 
-Консольное приложение на Английском языке, позволяющее искать фильмы в учебной базе **sakila** (MySQL), сохранять историю запросов в **MongoDB** и анализировать популярные поиски. Разработано как финальный проект студента Oleksandr Kovalchuk, курса *Python Fundamentals - IT Career Hub GMBH*.
+Search and analyze movies stored in a MySQL database using a clean, interactive command-line interface. Query logs are stored in MongoDB and auto-maintained for performance.
 
 ---
 
-## ✨ Возможности
+## ✨ Features
 
-- 🔍 **Поиск по ключевому слову** в названии фильма.
-- 🎞️ **Фильтрация по жанру и диапазону годов**.
-- 📈 **Статистика**: топ‑5 самых частых и 5 последних уникальных запросов.
-- 💾 **Логи** всех поисков хранятся в MongoDB (UTC‑метка времени, тип запроса, параметры, количество результатов).
-- 🌈 Красивый вывод в терминал с помощью *rich*.
+- 🔍 **Search by keyword** — instantly filter films by title
+- 🎞️ **Filter by genre and year range** — with full validation
+- 📈 **Top-5 most popular queries** — from Mongo logs
+- 🕓 **Last 5 unique queries** — for quick history reference
+- 🧼 **Old logs auto-cleaned** (older than 30 days)
+- 💡 **Rich CLI interface** with emoji, colors, and clean formatting
 
----
-
-## 🖥️ Технологии и стек
-
-| Компонент | Версия | Назначение |
-|-----------|--------|------------|
-| Python    | 3.10+  | Логика CLI, скрипты |
-| MySQL     | 8.x / 5.7 | Хранение базы `sakila` |
-| MongoDB   | 6.x / 5.x | Логи поисков и агрегирующие пайплайны |
-| rich      | 13.x  | Табличный вывод и цветной CLI |
-| pymysql   | 1.x   | Подключение к MySQL |
-| pymongo   | 4.x   | Работа с MongoDB |
-| python‑dotenv | 1.x | Загрузка секретов из `.env` |
 
 ---
 
-## ⚙️ Требования
+## 🗂 Project Structure
+film_search/
 
-- Python ≥ 3.10  
-- Локальные (или Docker‑) экземпляры **MySQL** и **MongoDB**  
-- Требуется Интернет подключение; все операции выполняются через удаленную базу данных.
+├── main.py               # CLI interface logic
 
-> **Суммарно** приложение протестировано на macOS Sequoia 15.1.1.
+├── formatter.py          # Output formatting and stats display
+
+├── log_writer.py         # MongoDB logger (with error handling)
+
+├── log_stats.py          # Aggregation logic for queries
+
+├── mysql_connector.py    # MySQL search queries
+
+├── config.py             # Load settings from .env
+
+├── requirements.txt      # Dependencies
+
+└── .env.example          # Environment variable sample
+## 🖥️ Technologies and stack
+
+| Components    | Version   | Purpose                               |
+|---------------|-----------|---------------------------------------|
+| Python        | 3.10+     | CLI logic, scripts                    |
+| MySQL         | 8.x / 5.7 | Storing the `sakila` database         |
+| MongoDB       | 6.x / 5.x | Search logs and aggregation pipelines |
+| rich          | 13.x      | Tabular output and color CLI         |
+| pymysql       | 1.x       | Connecting to MySQL                  |
+| pymongo       | 4.x       | Working with MongoDB                     |
+| python‑dotenv | 1.x       | Loading secrets from `.env`           |
 
 ---
 
-## 🚀 Быстрый старт
+## ⚙️ Requirements
+
+python >= 3.9
+
+pymysql
+
+pymongo
+
+python-dotenv
+
+rich
+
+> **In total** the application was tested on macOS Sequoia 15.1.1.
+---
+
+## 🚀 How to Run
 
 ```bash
-# 1. Клонируем репозиторий и переходим в него
+# 	1.	Clone the repo and go to the folder:
 $ git clone https://github.com/newbusinessman1/film_search.git
 $ cd film_search
 
-# 2. Создаём и активируем виртуальное окружение
+# 2. Create and activate a virtual environment
 $ python -m venv venv
 $ source venv/bin/activate   # Windows: venv\Scripts\activate
 
-# 3. Устанавливаем зависимости
+# 3. Install dependencies:
 $ pip install -r requirements.txt
 
-# 4. Заполняем файл .env своими данными
-$ cp .env.example .env      # или создайте вручную
+# 4. Fill the .env.example file with your data and rename it to .env
+$ cp .env.example .env      # or create manually
+
+# 5. Run the program:
+$ python3 main.py
+
+```
+
+---
+
+## 🔒 Safety & Error Handling
+
+- try/except added for all external connections (MySQL & Mongo)
+- Connection errors are caught and displayed clearly
+- User input (like year range) is validated against type errors
+- Logging to Mongo is suppressed if connection fails — no crash
+- Logs older than 30 days are automatically deleted
+
+---
+
+## 🧪 Example Output
+
+```bash
+
+🎬 Film Search CLI
+Search movies in the database
+
+1. 🔍 Search by keyword
+2. 🎯 Search by genre and year
+3. 📊 Top 5 Popular Queries
+4. 🕓 Last 5 unique queries
+0. ❌ Exit
+
+Your choice: _
+
+```
+
+---
+
+# 📁 License
+
+MIT (or specify otherwise)
+
+
+---
+
+# 🙌 Author
+
+Oleksandr Kovalchuk  
+[![GitHub](https://img.shields.io/badge/GitHub-121013?logo=github&logoColor=white)](https://github.com/newbusinessman1)  
+[![Instagram](https://img.shields.io/badge/Instagram-%239B37A7.svg?logo=instagram&logoColor=white)](https://instagram.com/oldbusinessman)

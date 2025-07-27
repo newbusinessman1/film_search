@@ -1,5 +1,6 @@
 from rich.table import Table
 from rich.console import Console
+import json
 
 console = Console()
 
@@ -28,7 +29,7 @@ def print_stats(rows, title):
     for r in rows:
         query = r["_id"]
         if isinstance(query, dict):
-            # если это keyword-запрос → покажем только значение
+            # if it's a keyword query → show only the value
             query = query.get("kw") or json.dumps(query, ensure_ascii=False)
         value = r.get("cnt") or r.get("ts") or "-"
         t.add_row(str(query), str(value))

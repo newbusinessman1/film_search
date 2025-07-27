@@ -16,7 +16,7 @@ MYSQL_CONFIG = {
 MONGO_URI = os.getenv("MONGO_URI")
 MONGO_DB  = os.getenv("MONGO_DB", "ich_edit")
 
-# ---------- Для имени коллекции ----------
+# ---------- For collection name ----------
 GROUP     = os.getenv("GROUP")
 FULL_NAME = os.getenv("FULL_NAME")
 

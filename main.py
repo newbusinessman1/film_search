@@ -10,6 +10,8 @@ from config import PAGE_SIZE
 from rich.console import Console
 from rich.panel import Panel
 
+from pymysql.err import OperationalError
+
 console = Console()
 
 def main():
@@ -42,13 +44,25 @@ def main():
                 offset += PAGE_SIZE
 
         elif choice == "2":
-            genres = list_genres()
+            try:
+                genres = list_genres()
+            except OperationalError:
+                console.print("[bold red]Error: Database is not connected[/bold red]")
+                return
             console.print("[bold green]Genre:[/bold green] " + ", ".join(genres))
             genre = input("Genre: ").strip()
             y = year_bounds()
             print(f"Years in DataBase: {y['min_y']}–{y['max_y']}")
-            y1 = int(input("Year from: "))
-            y2 = int(input("Year to: "))
+            try:
+                y1 = int(input("Year from: "))
+            except ValueError:
+                console.print("[bold red]Error: Invalid year[/bold red]")
+                return
+            try:
+                y2 = int(input("Year to: "))
+            except ValueError:
+                console.print("[bold red]Error: Invalid year[/bold red]")
+                return
             offset = 0
             while True:
                 rows = search_by_genre_year(genre, y1, y2, PAGE_SIZE, offset)
