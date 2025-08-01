@@ -26,7 +26,7 @@ def search_by_keyword(keyword: str, limit=PAGE_SIZE, offset=0):
         WHERE LOWER(f.title) LIKE %s
         GROUP BY f.film_id
         ORDER BY f.title
-        LIMIT %s OFFSET %s;
+        LIMIT %s OFFSET %s; 
     """
     with _conn() as c, c.cursor() as cur:
         cur.execute(sql, (f"%{keyword.lower()}%", limit, offset))
